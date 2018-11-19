@@ -1,3 +1,4 @@
+# Preliminary Declarations
 import os
 import random
 from player import Player
@@ -15,6 +16,7 @@ max_roll = 6
 roll_it = False
 enable_secret = False
 
+# Game Begins
 al.cool_face()
 print ("""
 > Howdy there! I'm the sun, but my friends call me Al, and you can too.
