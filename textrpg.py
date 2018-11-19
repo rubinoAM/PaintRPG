@@ -27,6 +27,11 @@ def fight():
     goblin_power = 2
 
     while hero_health > 0 and goblin_health > 0:
+        print ("You have %d health and %d power." % (hero_health, hero_power))
+        print ("The goblin has %d health and %d power." % (goblin_health, goblin_power))
+        print ("What shalt thou do? \n1.Fight\n2.Flee\n3.Dance")
+
+        choice = int(input(">"))
 
 
 def flee():
