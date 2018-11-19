@@ -150,7 +150,7 @@ def boss_fight():
         elif choice == 3:
             player.health += 50
             print ("You've healed yourself for 30 energy.")
-            print ("Your energy is now at %d points." % player["Health"])
+            print ("Your energy is now at %d points." % player.health)
 
         if secret_boss.health >= 0:
                 player.health -= secret_boss.power
