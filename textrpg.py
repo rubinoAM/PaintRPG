@@ -59,7 +59,7 @@ print ("> Well alrighty, %s! Let's get a move on!" % player['Name'])
 print ("> Saturday is the day for me. Not a cloud in sight!")
 
 def play():
-    print ("It's game time, %s!" % player['Name'])
+    print ("> It's game time, %s!" % player['Name'])
 
     wont_play = False
     jerk_pts = 0
@@ -128,6 +128,7 @@ __    ______  _____  _____  _____  _____  _  _  _  _
 /_/   |___/   \___/  \___/  \___/ \____/ (_)(_)(_)(_)
                 """)
                 print ("Well unfortunately you're dead now.\nGood job aggravating the sun, idiot!")
+                break
             wont_play = True   
         else:
             wont_play = False
@@ -153,13 +154,13 @@ __    ______  _____  _____  _____  _____  _  _  _  _
                 player['Health'] += 50
                 print ("Thumbnailing the ideas you had in your head has helped your resolve.\nYou've regained 30 energy through your problem solving.")
                 print ("Your energy is now at %d points." % player["Health"])
-
-        if canvas["Health"] >= 0:
-            player['Health'] -= canvas['Power']
-            print ("Time has passed.\nYou feel a bit more tired. You've lost %d energy points." % canvas["Power"])
-            if player["Health"] <= 0:
-                os.system("clear")
-                print ("""
+        if wont_play == False:
+            if canvas["Health"] >= 0:
+                player['Health'] -= canvas['Power']
+                print ("Time has passed.\nYou feel a bit more tired. You've lost %d energy points." % canvas["Power"])
+                if player["Health"] <= 0:
+                    os.system("clear")
+                    print ("""
             :
    `.       ;        .'
      `.  .-'''-.   .'
@@ -173,12 +174,12 @@ __    ______  _____  _____  _____  _____  _  _  _  _
     .'      :      `.  
             :
 """)
-                print ("> You're all out of energy and with no finished piece to show for it.")
-                print ("> Better luck next time!")
-                break
-            elif player["Laziness"] == 30:
-                os.system("clear")
-                print ("""
+                    print ("> You're all out of energy and with no finished piece to show for it.")
+                    print ("> Better luck next time!")
+                    break
+                elif player["Laziness"] == 30:
+                    os.system("clear")
+                    print ("""
             :
    `.       ;        .'
      `.  .-'''-.   .'
@@ -192,12 +193,12 @@ __    ______  _____  _____  _____  _____  _  _  _  _
     .'      :      `.  
             :
 """)
-                print ("> Your laziness has gotten the better of you and you've given up for today.")
-                print ("> Smooooooooth.")
-                break
-        else:
-            os.system("clear")
-            print ("""
+                    print ("> Your laziness has gotten the better of you and you've given up for today.")
+                    print ("> Smooooooooth.")
+                    break
+            else:
+                os.system("clear")
+                print ("""
             :
    `.       ;        .'
      `.  .-'''-.   .'
@@ -211,11 +212,11 @@ __    ______  _____  _____  _____  _____  _  _  _  _
     .'      :      `.  
             :
 """)
-            os.system("say Yay!")
-            print ("Yay! Your masterpiece is finally completed!")
-            print ("You feel a tremendous wave of confidence overcome you as you marvel at the finished piece.")
-            break
+                os.system("say Yay!")
+                print ("Yay! Your masterpiece is finally completed!")
+                print ("You feel a tremendous wave of confidence overcome you as you marvel at the finished piece.")
+                break
 
-        input("Please press enter to continue.")
-        os.system("clear")
+            input("Please press enter to continue.")
+            os.system("clear")
 play()
