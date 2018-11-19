@@ -1,37 +1,76 @@
 import os
-# os.system() Takes any linux command. If python can run it, it will.
+import random
 
-hero = {    # Global, meaning anyone can see it
+player = {
     "Name":"",
     "Health":100,
     "Power":50
 }
 
-goblin = {
+canvas = {
     "Health":60,
     "Power":20
 }
 
-player_name = input("Pray thee. What is thine name, oh brave adventurer? > ")
-hero['Name'] = player_name.capitalize()
+min_roll = 1
+max_roll = 6
+roll_it = False
 
-print ("Good day to you, valiant %s! May thine conquest be bountiful and may thine travels be safe." % hero['Name'])
-print ("On thine travels through the kingdom, thou should happen upon a goblin.")
+print ("""
+            :
+   `.       ;        .'
+     `.  .-'''-.   .'
+       ;'  __   _;'
+      /   '_    _`\`
+     |  _( a (  a  |
+'''''| (_)    >    |``````
+      \    \    / /
+       `.   `--'.'
+      .' `-,,,-' `.
+    .'      :      `.  
+            :
+
+> Howdy there! I'm the sun, but my friends call me Al, and you can too.
+> Welcome to Paint Attack!
+> You're a just humble artist who recently has been struck with a bad case of artist's block.
+> But today's the day you finally fight back and create another masterpiece.
+> The object of the game is to work on your piece (i.e. fight your canvas) until it's completed.
+""")
+
+player_name = input("> Soooooooo... what's your name? ")
+player['Name'] = player_name.capitalize()
+
+print ("""
+            :
+   `.       ;        .'
+     `.  .-'''-.   .'
+       ;'  __   _;'
+      /   '       `\`
+     |  _( O (  O  |
+'''''| (_)  __>__  |``````
+      \    \    / /
+       `.   `--'.'
+      .' `-,,,-' `.
+    .'      :      `.  
+            :
+""")
+print ("> Well alrighty, %s! Let's get a move on!" % player['Name'])
+print ("> On thine travels through the kingdom, thou should happen upon a canvas.")
 
 def fight():
-    print ("Godspeed you, oh brave %s!" % hero['Name'])
+    print ("Godspeed you, oh brave %s!" % player['Name'])
 
-    hero_health = 10 # Only accessible inside of fight() since they're only in the function scope
-    hero_power = 5
-    goblin_health = 6
-    goblin_power = 2
+    player_health = 10
+    player_power = 5
+    canvas_health = 6
+    canvas_power = 2
 
     fool_hardy = False
 
-    while hero_health > 0 and goblin_health > 0:
+    while player_health > 0 and canvas_health > 0:
         if(not fool_hardy):
-            print ("You have %d health and %d power." % (hero_health, hero_power))
-            print ("The goblin has %d health and %d power." % (goblin_health, goblin_power))
+            print ("You have %d health and %d power." % (player_health, player_power))
+            print ("The canvas has %d health and %d power." % (canvas_health, canvas_power))
             print ("What shalt thou do? \n1.Fight\n2.Flee\n3.Dance")
 
         choice = int(input("> "))
@@ -42,41 +81,25 @@ def fight():
         else:
             fool_hardy = False
             if choice == 1:
-                goblin_health -= hero_power
-                print ("You have done %d damage to the goblin!" % hero_power)
+                canvas_health -= player_power
+                print ("You have done %d damage to the canvas!" % player_power)
             elif choice == 2:
-                print ("Goodbye, %s... you cowardly sod!" % hero['Name'])
+                print ("Goodbye, %s... you cowardly sod!" % player['Name'])
                 break;
             elif choice == 3:
-                hero_health += 3
-                print ("The goblin stares dazed and confused at your spontaneous dancing.\nHis delayed assault allows you time to regain 3 health points.")
-                print ("Your health is now at %d points." % hero_health)
+                player_health += 3
+                print ("The canvas stares dazed and confused at your spontaneous dancing.\nHis delayed assault allows you time to regain 3 health points.")
+                print ("Your health is now at %d points." % player_health)
 
-        if goblin_health >= 0:
-            hero_health -= goblin_power
-            print ("The goblin hits you for %d damage" % goblin_power)
-            if hero_health <= 0:
+        if canvas_health >= 0:
+            player_health -= canvas_power
+            print ("The canvas hits you for %d damage" % canvas_power)
+            if player_health <= 0:
                 print ("Thou hast been slain.")
         else:
             os.system("say Huzzah!")
-            print ("Huzzah! The goblin hast been slain!")
+            print ("Huzzah! The canvas hast been slain!")
 
         input("Please press enter to continue.")
         os.system("clear")
 fight()
-
-""" def flee():
-    print ("Goodbye, coward!")
-
-def dance():
-    print ("Do the hussle!")
-
-if(choice == 1):
-    fight()
-elif(choice == 2):
-    flee()
-elif(choice == 3):
-    dance()
-else:
-    print ("That's not a choice! Pick an actual option!\n1.Fight\n2.Flee\n3.Dance")
-    choice = int(input("> ")) """
