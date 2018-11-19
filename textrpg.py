@@ -4,11 +4,11 @@ import random
 player = {
     "Name":"",
     "Health":100,
-    "Power":50
+    "Power":15
 }
 
 canvas = {
-    "Health":60,
+    "Health":100,
     "Power":20
 }
 
@@ -48,58 +48,139 @@ print ("""
       /   '       `\`
      |  _( O (  O  |
 '''''| (_)  __>__  |``````
+      \    \____/ /
+       `.       .'
+      .' `-,,,-' `.
+    .'      :      `.  
+            :
+""")
+print ("> Well alrighty, %s! Let's get a move on!" % player['Name'])
+print ("> Saturday is the day for me. Not a cloud in sight!")
+
+def play():
+    print ("It's game time, %s!" % player['Name'])
+
+    wont_play = False
+    jerk_pts = 0
+
+    while player_health > 0 and canvas_health > 0:
+        if(not wont_play):
+            print ("> You have %d energy and can get %d work done right now." % (player['Health'], player['Power']))
+            print ("> The canvas needs %d more work and will drain %d energy." % (canvas['Health'], canvas['Power']))
+            print ("> What'll you do? \n1.Paint\n2.Procrastinate\n3.Thumbnail")
+
+        choice = int(input("> "))
+
+        if choice not in range(1,4):
+            if jerk_pts < 3:
+                jerk_pts += 1
+                print ("""
+            :
+   `.       ;        .'
+     `.  .-'''-.   .'
+       ;'  __   _;'
+      /   '\    / `\`
+     |  _( \ (  /  |
+'''''| (_)    >    |``````
+      \    xxxxx  /
+       `.       .'
+      .' `-,,,-' `.
+    .'      :      `.  
+            :
+""")
+                print ("> Don't be a jerk! Pick something! \n1.Paint\n2.Procrastinate\n3.Thumbnail")
+            else:
+                os.system("clear")
+                print ("""
+                        |
+                    .   |
+                        |
+          \    *        |     *    .  /
+            \        *  |  .        /
+         .    \     ___---___     /    .  
+                \.--         --./     
+     ~-_    *  ./               \.   *   _-~
+        ~-_   /    \         /    \   _-~     *
+   *       ~-/    __\       /__    \-~        
+     .      |    (_O_)     (_O_)    |      .
+         * |        /   |   \       | *     
+-----------|           |             |-----------
+  .        |           |             |        .    
+        *   |           --          | *
+           _-\ ____________________/-_    *
+     .  _-~ . \     |    |    |    /   ~-_     
+     _-~       `\   |    |    |  /'*      ~-_  
+    ~           /`--|__  |___-|'\           ~
+           *  /        ---     .  \       .
+            /     *     |           \`
+          /             |   *         \`
+                     .  |        .
+                        |
+                        |
+
+__    ______  _____  _____  _____  _____  _  _  _  _ 
+\ \   |  _  \|_   _||_   _||_   _||  ___|| || || || |
+ \ \  | | | |  | |    | |    | |  | |__  | || || || |
+  > > | | | |  | |    | |    | |  |  __| | || || || |
+ / /  | |/ /  _| |_  _| |_  _| |_ | |___ |_||_||_||_|
+/_/   |___/   \___/  \___/  \___/ \____/ (_)(_)(_)(_)
+                """)
+                print ("Well unfortunately you're dead now.\nGood job aggravating the sun, idiot!")
+            wont_play = True   
+        else:
+            wont_play = False
+            if choice == 1:
+                canvas['Health'] -= player['Power']
+                print ("You have done %d damage to the canvas!" % player['Power'])
+            elif choice == 2:
+                print ("Goodbye, %s... you cowardly sod!" % player['Name'])
+                break;
+            elif choice == 3:
+                player['Health'] += 30
+                print ("The canvas stares dazed and confused at your spontaneous dancing.\nHis delayed assault allows you time to regain 30 energy.")
+                print ("Your energy is now at %d points." % player["Health"])
+
+        if canvas["Health"] >= 0:
+            player['Health'] -= canvas['Power']
+            print ("You feel a bit more tired. You've lost %d energy points." % canvas["Power"])
+            if player["Health"] <= 0:
+                os.system("clear")
+                print ("""
+            :
+   `.       ;        .'
+     `.  .-'''-.   .'
+       ;'        ;'
+      /   '/    \ `\`
+     |  _( / (  \  |
+'''''| (_)    >  ' |``````
+      \      ~~  '/
+       `.       .'
+      .' `-,,,-' `.
+    .'      :      `.  
+            :
+""")
+                print ("> You're all out of energy and with no finished piece to show for it.")
+                print ("> Better luck next time!")
+        else:
+            os.system("clear")
+            print ("""
+            :
+   `.       ;        .'
+     `.  .-'''-.   .'
+       ;'  ^    ^;'
+      /   '       `\`
+     |  _( ^ (  ^  |
+'''''| (_)  __>__  |``````
       \    \    / /
        `.   `--'.'
       .' `-,,,-' `.
     .'      :      `.  
             :
 """)
-print ("> Well alrighty, %s! Let's get a move on!" % player['Name'])
-print ("> On thine travels through the kingdom, thou should happen upon a canvas.")
-
-def fight():
-    print ("Godspeed you, oh brave %s!" % player['Name'])
-
-    player_health = 10
-    player_power = 5
-    canvas_health = 6
-    canvas_power = 2
-
-    fool_hardy = False
-
-    while player_health > 0 and canvas_health > 0:
-        if(not fool_hardy):
-            print ("You have %d health and %d power." % (player_health, player_power))
-            print ("The canvas has %d health and %d power." % (canvas_health, canvas_power))
-            print ("What shalt thou do? \n1.Fight\n2.Flee\n3.Dance")
-
-        choice = int(input("> "))
-
-        if choice not in range(1,4):
-            print ("To the beasts with this asinine foolishness! Thou must choose!\n1.Fight\n2.Flee\n3.Dance")
-            fool_hardy = True
-        else:
-            fool_hardy = False
-            if choice == 1:
-                canvas_health -= player_power
-                print ("You have done %d damage to the canvas!" % player_power)
-            elif choice == 2:
-                print ("Goodbye, %s... you cowardly sod!" % player['Name'])
-                break;
-            elif choice == 3:
-                player_health += 3
-                print ("The canvas stares dazed and confused at your spontaneous dancing.\nHis delayed assault allows you time to regain 3 health points.")
-                print ("Your health is now at %d points." % player_health)
-
-        if canvas_health >= 0:
-            player_health -= canvas_power
-            print ("The canvas hits you for %d damage" % canvas_power)
-            if player_health <= 0:
-                print ("Thou hast been slain.")
-        else:
             os.system("say Huzzah!")
-            print ("Huzzah! The canvas hast been slain!")
+            print ("Huzzah! Your masterpiece is finally completed!")
+            print ("You feel a tremendous wave of confidence overcome you as you marvel at the finished piece.")
 
         input("Please press enter to continue.")
         os.system("clear")
-fight()
+play()
