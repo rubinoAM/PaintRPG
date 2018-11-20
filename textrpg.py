@@ -1,15 +1,17 @@
 # Preliminary Declarations
 import os
 import random
-from player import Player
-from canvas import Canvas
-from secretboss import Secret_Boss
+import player
+import canvas
+import secretboss
 from mrsun import Mr_Sun
+from painting import Painting
 
-player = Player("")
-canvas = Canvas()
-secret_boss = Secret_Boss()
+player = player.Player("")
+canvas = canvas.Canvas()
+secret_boss = secretboss.Secret_Boss()
 al = Mr_Sun()
+painting = Painting()
 
 min_roll = 1
 max_roll = 6
@@ -26,7 +28,7 @@ print ("""
 > The object of the game is to work on your piece (i.e. fight your canvas) until it's completed.
 """)
 
-player_name = input("> Soooooooo... what's your name? ")
+player_name = raw_input("> Soooooooo... what's your name? ")
 player.name = player_name.capitalize()
 
 al.happy_face()
@@ -45,7 +47,7 @@ def play():
             print ("> The canvas needs %d more work and will drain %d energy." % (canvas.health, canvas.power))
             print ("> What'll you do? \n1.Paint\n2.Procrastinate\n3.Thumbnail")
 
-        choice = int(input("> "))
+        choice = int(raw_input("> "))
 
         if choice not in range(1,4):
             if jerk_pts < 3:
@@ -101,6 +103,9 @@ def play():
                     break
             else:
                 os.system("clear")
+                painting.painting_fin()
+                raw_input("Please press enter to continue.")
+                os.system("clear")
                 al.ecstatic_face()
                 os.system("say Yay!")
                 print ("> Yay! Your masterpiece is finally completed!")
@@ -118,7 +123,7 @@ def play():
                     else:
                         break
 
-            input("Please press enter to continue.")
+            raw_input("Please press enter to finish.")
             os.system("clear")
 
 def boss_fight():
@@ -129,7 +134,7 @@ def boss_fight():
 
     while player.health > 0 and secret_boss.health > 0:
         print ("What will you do? 1. Attack 2. Wait 3. Heal")
-        choice = int(input("> "))
+        choice = int(raw_input("> "))
 
         if choice == 1:
             canvas.health -= player.power
@@ -169,7 +174,7 @@ def boss_fight():
             print ("> I'm so proud of you %s." % player.name)
             break
 
-        input("Please press enter to continue.")
+        raw_input("Please press enter to continue.")
         os.system("clear")
 
 play()
